@@ -1,0 +1,44 @@
+{% extends "../base/base.html" %}
+{% load static %}
+
+{% block title %} Student Dashboard {% endblock %}
+
+{% block otherstyle %}
+
+<style>
+    .btn-view {
+        background-color: #cce5ff;
+        border-color: #99c2e5;
+    }
+
+    .btn-create {
+        background-color: #d4edda;
+        border-color: #badbcc;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="alert alert-success text-center">Welcome to the Library Management System</h3>
+    <div class="jumbotron">
+        <h1 class="display-4">Hello {{user.first_name}}!</h1>
+        <p class="lead">As a student, you can check how many books you have borrowed from the library, any fines, and more.</p>
+        <hr class="my-4">
+        <p>Options Available for You</p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="options text-center">
+                    <a href="{% url 'viewissuedbookbystudent' %}" class="btn btn-view btn-primary btn-lg text-dark" role="button">View Issued Books</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="options text-center">
+                    <a href="{% url 'makebookrequest' %}" class="btn btn-create btn-secondary btn-lg text-dark" role="button">Request for a book</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "../base/base.html" %}
+{% load static %}
+
+{% block title %} All Issued Books {% endblock %}
+
+
+{% block otherstyle %}
+
+{% endblock %}
+
+{% block content %}
+
+<br>
+<br>
+<h3 class="p-3 mb-2 bg-info text-white" style = 'font-size: 30px;text-align:center;margin-bottom:0px;'>Issued books to Student</h3>
+
+{% if issuedbooks%}
+<div class="container table-responsive-sm col-12">
+  <table class="table table-sm table-panel table-hover table-striped">
+    <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Enrollment</th>
+          <th>Book Name</th>
+          <th>Author</th>
+          <th>Issued</th>
+          <th>Expiry Date</th>
+          <th>Fine</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+        <td colspan="7">
+        <div class="links"></div>
+        </td>
+        </tr>
+        </tfoot>
+    <tbody>
+      {% for issuance in issuedbooks %}
+        <tr class="{%if issuance.due_in < 0 %}table-danger{%else%}{%endif%} ">
+          <td>{{issuance.student.full_name}}</td>
+          <td>{{issuance.student.enrollment}}</td>
+          <td>{{issuance.book.name}}</td>
+          <td>{{issuance.book.author}}</td>
+          <td>{{issuance.issuedate}}</td>
+          <td>{{issuance.expirydate}}</td>
+          <td>
+              {% if issuance.due_in >= 0 %}
+                  Not Due
+              {% else %}
+                  {{ issuance.due_in|slice:"1:" }} days
+              {% endif %}
+          </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+  </table>
+    </div>
+    {%else%}
+    <h1> 0 book Issued</h1>
+    {%endif%}
+ 
+{% endblock %}
+

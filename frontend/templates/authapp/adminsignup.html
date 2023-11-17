@@ -1,0 +1,24 @@
+
+{% extends "./authform.html" %}
+{% load static %}
+
+{% block title %} Login {% endblock %}
+
+
+
+{% block authheadline %}
+	<h2>&#x1F44B; SignUp As Admin! &#x1F44B;</h2>
+{% endblock %}
+
+{% block buttontext %}
+	Register
+{% endblock %}
+
+{% block rememberme %}
+{% endblock %}
+
+{% block elsechoice %}
+<div class = "register-link">
+	<a href="{% url 'adminlogin' %}" > <span>Or Login as Admin</span></a>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "../base/base.html" %}
+{% load static %}
+
+{% block title %} Pending Requests {% endblock %}
+
+{% block otherstyle %}
+<style>
+  /* Custom styles for the pending requests */
+  .request-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+  }
+
+  .request-actions a {
+    margin-right: 10px;
+  }
+
+  .no-requests {
+    font-style: italic;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">Pending Book Requests</h1>
+
+    {% if pending_requests %}
+      <div class="list-group">
+        {% for request in pending_requests %}
+          <div class="list-group-item request-item">
+            <h4 class="mb-2">{{ request.student.full_name }}</h4>
+            <p class="mb-2">Requested: {{ request.book.name }}</p>
+            <div class="request-actions">
+              <a href="{% url 'accept_request' request.pk %}" class="btn btn-success">Accept</a>
+              <a href="{% url 'reject_request' request.pk %}" class="btn btn-danger">Reject</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="no-requests">No pending requests.</p>
+    {% endif %}
+  </div>
+{% endblock %}

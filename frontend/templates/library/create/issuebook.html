@@ -1,0 +1,27 @@
+{% extends "./objectcreate.html" %}
+{% load static %}
+
+{% block title %} Issue A Book {% endblock %}
+
+
+{% block otherstyle %}
+
+{% endblock %}
+
+{% block addtext %}
+	ISSUE BOOK TO STUDENT
+{% endblock %}
+
+{% block sendtext %}
+	ISSUE BOOK
+{% endblock %}
+
+{% block created %}
+
+<div class="text-center mt-3">
+	<a href="{% url 'viewissuedbook' %}" class="btn btn-secondary">
+		View All active issued Books
+	</a>
+</div>
+
+{% endblock %}

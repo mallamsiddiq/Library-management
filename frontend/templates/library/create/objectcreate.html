@@ -1,0 +1,87 @@
+{% extends "../../base/base.html" %}
+{% load static %}
+
+{% block title %} {{user.full_name}} {% endblock %}
+
+
+{% block otherstyle %}
+
+{% endblock %}
+
+{% block content %}
+    <br>
+   <br>
+    <div class="signup-form">
+		<div class="container">
+			<h1>
+
+				{% block addtext %}
+					Add a Book
+				{% endblock %}
+				
+				</h1>
+			<form method="post" class="form">
+				{% csrf_token %}
+                {% if form.non_field_errors %}
+                    <span class="text-danger alert-error">{{ form.non_field_errors}}</span>
+                {% endif %}
+				{% for field in form %}
+					<div class="form-group mt-2">
+						{% if field.field.widget.input_type == 'text' or field.field.widget.input_type == 'number' or field.field.widget.input_type == 'textarea' or field.field.widget.input_type == 'email' %}
+						<input type="{{field.field.widget.input_type}}" 
+							class="form-control" id="{{ field.id_for_label }}"
+							placeholder="{{ field.label }}" name="{{ field.name }}">
+
+                        {% elif field.field.widget.attrs.is_textarea %}
+                            <textarea class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" 
+                            rows="3" cols="30" placeholder="{{ field.label }}">{{ field.name }}
+                            </textarea>
+                        
+                        {% elif field.field.widget.input_type == 'select' %}
+						<select class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}">
+							<option value="" disabled selected>{{ field.label }}</option>
+							{% for option in field.field.choices %}
+							<option value="{{ option.0 }}">{{ option.1 }}</option>
+							{% endfor %}
+						</select>
+						{% else %}
+						{{ field }}
+                        
+						{% endif %}
+                        {% if field.errors %}
+                            <span class="text-danger alert-error">{{ field.errors }}</span>
+                        {% endif %}
+					</div>
+				{% endfor %}
+				<div class="form-group mt-2">
+					<button type="submit" class="btn btn-primary">
+						{% block sendtext %}
+							Add Book
+						{% endblock %}
+					</button>
+				</div>
+			</form>
+		</div>
+        {% block created %}
+            <div class="text-center mt-3">
+                <a href="{% url 'viewbook' %}" class="btn btn-secondary">View Available Books in the Library</a>
+            </div>
+        {% endblock %}    	
+	</div>
+  {% endblock %}
+
+  
+{% block otherscripts %}
+<script>
+
+// dissapear pooped messages
+$(document).ready(function() {
+    setTimeout(function() {
+        var messages = $('.alert-error');
+
+        // Fade out the message(s) over 1 second
+        messages.fadeOut(1000);
+    }, 3000); // Delay for 3 seconds (3000 milliseconds)
+});
+</script>
+{% endblock %}

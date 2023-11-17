@@ -1,0 +1,64 @@
+{% extends "../base/base.html" %}
+{% load static %}
+
+{% block title %} Admin Dashboard {% endblock %}
+
+{% block otherstyle %}
+<style>
+    .btn-view {
+        background-color: #cce5ff;
+        border-color: #99c2e5;
+    }
+
+    .btn-create {
+        background-color: #d4edda;
+        border-color: #badbcc;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="alert alert-success text-center">Welcome to the Library Management System</h3>
+    <div class="jumbotron">
+        <h1 class="display-4">Hello {{user.first_name}}!</h1>
+        <p class="lead">As an admin, you have access to various actions in the library management system.</p>
+        <hr class="my-4">
+        <p class="mb-3">Options Available for You</p>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="options text-center">
+                    <a href="{% url 'admin-pending-requests' %}" class="btn btn-view btn-lg btn-block mb-3" role="button">View Pending Requests</a>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="options text-center">
+                    <a href="{% url 'viewbook' %}" class="btn btn-view btn-lg btn-block mb-3" role="button">View Available Books</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="options text-center">
+                    <a href="{% url 'issuebook' %}" class="btn btn-create btn-lg btn-block mb-3" role="button">Issue New Book</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="options text-center">
+                    <a href="{% url 'viewissuedbook' %}" class="btn btn-view btn-lg btn-block mb-3" role="button">View Issued Books</a>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="options text-center">
+                    <a href="{% url 'viewstudent' %}" class="btn btn-view btn-lg btn-block mb-3" role="button">View Students</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="options text-center">
+                    <a href="{% url 'addbook' %}" class="btn btn-create btn-lg btn-block mb-3" role="button">Add Book to Library</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

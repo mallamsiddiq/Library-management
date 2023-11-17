@@ -1,0 +1,21 @@
+{% extends "../../base/base.html" %}
+{% load static %}
+
+{% block title %} Book Issued Successfully {% endblock %}
+
+{% block otherstyle %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="alert alert-success text-center" role="alert">
+        <h3>Book Issued Successfully!</h3>
+    </div>
+    <div class="options text-center mt-4">
+        <a href="{% url 'issuebook' %}" class="btn btn-primary btn-lg" role="button">Issue More Books</a>
+    </div>
+    <div class="options text-center mt-4">
+        <a href="{% url 'viewissuedbook' %}" class="btn btn-primary btn-lg" role="button">View Issued Books</a>
+    </div>
+</div>
+{% endblock %}

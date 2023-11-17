@@ -1,0 +1,21 @@
+{% extends "../../base/base.html" %}
+{% load static %}
+
+{% block title %} Book Request {% endblock %}
+
+{% block otherstyle %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="alert alert-success text-center" role="alert">
+        <h3>Book Reuested Successfully!</h3>
+    </div>
+    <div class="options text-center mt-4">
+        <a href="{% url 'makebookrequest' %}" class="btn btn-primary btn-lg" role="button">Request Another Book</a>
+    </div>
+    <div class="options text-center mt-4">
+        <a href="{% url 'viewbook' %}" class="btn btn-primary btn-lg" role="button">View Books in Library</a>
+    </div>
+</div>
+{% endblock %}

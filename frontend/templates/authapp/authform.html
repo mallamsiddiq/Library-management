@@ -1,0 +1,92 @@
+{% extends "../base/base.html" %}
+{% load static %}
+
+{% block title %} Login {% endblock %}
+
+
+{% block otherstyle %}
+<link rel="stylesheet" href="{% static 'css/authapp/styles.css' %}">
+
+
+{% endblock %}
+
+{% block content %}
+
+<div class="form-box">
+    
+
+    <div class="login-box">
+        {% block authheadline %}
+            <h2>&#x1F44B; Login As Admin! &#x1F44B;</h2>
+        {% endblock %}
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                    <span class="text-danger alert-error">{{ form.non_field_errors}}</span>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="user-box">
+                {{ field }}
+                {{ field.label_tag }}
+                {% if field.errors %}
+                    <span class="text-danger alert-error">{{ field.errors}}</span>
+                {% endif %}
+               </div>
+            {% endfor %}
+    
+            <!-- {{ form.as_p }} -->
+            <div class="submit-box">
+                <button type="submit">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+					{% block buttontext %}
+					Login
+					{% endblock %}
+                    
+                </button>
+                {% block rememberme %}
+                <div class="re-me-container">
+                    
+                        <span>Remember Me</span>
+                    
+                    
+                    
+                    <label class="switch" for="checkbox">
+                        
+                      <input type="checkbox" id="checkbox" name = "remember_me" />
+                      <div class="slider round"></div>
+                    </label>
+                </div>
+                {% endblock %}
+    
+            </div>
+        </form>
+        {% block elsechoice %}
+        <div class = "register-link">
+            <a href="{% url 'adminsignup' %}" > <span>Or Create Amin Account</span></a>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block otherscripts %}
+<script>
+
+// dissapear pooped messages
+$(document).ready(function() {
+    setTimeout(function() {
+        var messages = $('.alert-error');
+
+        // Fade out the message(s) over 1 second
+        messages.fadeOut(1000);
+    }, 3000); // Delay for 3 seconds (3000 milliseconds)
+});
+</script>
+{% endblock %}
